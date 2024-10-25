@@ -1,0 +1,54 @@
+# CI de nível 04 - Disparo dentro do fluxo de CI de desenvolvimento
+
+#nome que vai aparecer nas opções da pipe
+name: 'Execução Integrada'
+
+#triggers ou gatilhos de execução
+#nesse caso, gatilho agendado = schedule
+on:
+  workflow_dispatch:
+
+jobs:
+
+  inspection:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalando Yarn
+        run: npm install -g yarn
+
+      - name: Instalando Dependências
+        run: yarn  
+
+      - name: Padronização de Código (Lint)
+        run: yarn lint
+
+  #Descrição do job
+  e2e-tests:
+    #Máquina que o job vai executar
+    runs-on: ubuntu-latest
+
+    #Passo a passo das ações do job
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalando Yarn
+        run: npm install -g yarn
+
+      - name: Instalando Dependencias
+        run: yarn
+
+      - name: Instalando Playwright
+        run: yarn playwright install
+
+      - name: Testes End-to-End (E2E)
+        run: yarn run e2e
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: relatorio-de-testes
+          path: ./playwright-report
+
