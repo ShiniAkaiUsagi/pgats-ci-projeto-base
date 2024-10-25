@@ -9,7 +9,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   inspection:
     runs-on: ubuntu-latest
 
@@ -20,7 +19,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Instalando Dependências
-        run: yarn  
+        run: yarn
 
       - name: Padronização de Código (Lint)
         run: yarn lint
@@ -51,4 +50,3 @@ jobs:
         with:
           name: relatorio-de-testes
           path: ./playwright-report
-
