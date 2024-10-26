@@ -1,35 +1,40 @@
-#nome que vai aparece nas opções da pipe
-#name: 'Execução Agendada'
+# nome que vai aparece nas opções da pipe
+name: 'Execução Agendada'
 
-#triggers ou gatilhos de execução
-#nesse caso, gatilho agendado = schedule
-#on:
-#  schedule:
-#Cron POSIX - CrontabGuru, site para auxiliar a entender
-#    - cron: '0 8 * * 1'
+# triggers ou gatilhos de execução
+# nesse caso, gatilho agendado = schedule
+on:
+ schedule:
+   - cron: '0 8 * * 1'
+# Cron POSIX - CrontabGuru, site para auxiliar a entender
+# Minuto - Hora - Dia do Mês - Mês do Ano - Dia da Semana
+# Toda 2a feira as 8h am
 
-#jobs:
-#Descrição do job
-#  e2e-tests:
-#Maquina que o job vai executar
-#    runs-on: ubuntu-latest
+jobs:
+#descricao job
+  e2e-tests:
+  #descricao maquin
+    runs-on: ubuntu-latest
+    #passp a passo
+    steps:  
+    - uses: actions/checkout@v4
 
-#Passo a passo das ações do job
-#    steps:
-#      - name: Instalando Yarn
-#        run: npm install -g yarn
+    - name: Instalando yarn
+      run: npm i -g yarn
 
-#      - name: Instalando dependencias
-#        run: yarn
+    - name: Instalanco dependencia
+      run: yarn
 
-#      - name: Instalando Playwright
-#        run: yarn playwright install
+    - name: Instalanco playwright
+      run: yarn playwright install
 
-#      - name: Testes E2E (end to end)
-#        run: yarn run e2e
+    - name: testes e2e
+      run: yarn run e2e
 
-#      - uses: actions/upload-artifact@v4
-#        if: ${{ !cancelled() }}
-#        with:
-#          name: relatorio-de-testes
-#          path: ./playwright-report
+    # - name: testes unit 
+    #   run: yarn run test
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: relatorio de testes
+        path: ./playwright-report 
