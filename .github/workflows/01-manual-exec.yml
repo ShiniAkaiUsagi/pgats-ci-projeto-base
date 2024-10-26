@@ -1,1 +1,34 @@
+#nome que vai aparece nas opções da pipe
+name: 'Execução Manual'
 
+#triggers ou gatilhos de execução
+#nesse caso, gatilho manual = workflow_dispatch
+on:
+  workflow_dispatch:
+
+jobs:
+  #Descrição do job
+  e2e-tests:
+    #Maquina que o job vai executar
+    runs-on: ubuntu-latest
+
+    #Passo a passo das ações do job
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalando Yarn
+        run: npm install -g yarn
+
+      - name: Instalando dependencias
+        run: yarn
+
+      - name: Instalando Playwright
+        run: yarn playwright install
+
+      - name: Testes E2E (end to end)
+        run: yarn run e2e
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: relatorio-de-testes
+          path: ./playwright-report
