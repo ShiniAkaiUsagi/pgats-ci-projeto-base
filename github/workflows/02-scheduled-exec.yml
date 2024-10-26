@@ -8,7 +8,12 @@ name: 'Execução Agendada'
 on:
   schedule:
     #Cron POSIX - CrontabGuru, site para auxiliar a entender
-    - cron: '0 8 * * 1'
+    - cron: '0 8 * * 1' # toda 2a feira as 8h am
+    # a - minuto
+    # b - hora
+    # c - dia do mês
+    # d - meses do ano
+    # e - dia da semana
 
 jobs:
   #Descrição do job
