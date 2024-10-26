@@ -1,5 +1,5 @@
 #nome que vai aparece nas opções da pipe
-name: 'Execução por Deploy'
+name: '03. Execução Post-Deploy'
 
 #triggers ou gatilhos de execução
 on:

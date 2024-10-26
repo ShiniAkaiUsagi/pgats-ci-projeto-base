@@ -1,5 +1,5 @@
 # nome que vai aparece nas opções da pipe
-name: 'Execução Agendada'
+name: '02. Execução Agendada'
 
 # triggers ou gatilhos de execução
 # nesse caso, gatilho agendado = schedule
